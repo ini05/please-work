@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+        
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-color: #f0f8ff;
+            background-image: radial-gradient(#ffafcc 1px, transparent 1px);
+            background-size: 25px 25px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: linear-gradient(135deg, #b3e5fc, #e3f2fd);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 60%;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            font-weight: normal;
+        }
+        .signature {
+            font-size: 1.5rem;
+            color: #ff69b4;
+            margin-top: 10px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #d6336c;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-800px);
+                opacity: 0;
+            }
+        }
+        .flying-heart {
+            position: absolute;
+            animation: float 12s linear infinite;
+            font-size: 22px;
+            color: #ff69b4;
+            opacity: 0.5;
+            animation-delay: calc(-12s * var(--i));
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <h1 class="question">my favourite person, pongal, i.e. you - bhatia ji autism.. my bestest meanie and of course my gru <33<br>will you be my valentine?</h1>
+        <p class="signature">love,<br>pasandida aurat 💖</p>
+        
+        <div class="button-container" id="button-container">
+            <button id="yes-btn">yes!</button>
+            <button id="no-btn">no...</button>
+        </div>
+    </div>
+
+    <script>
+        function createFlyingHearts() {
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement("span");
+                heart.classList.add("flying-heart");
+                heart.textContent = "❤️";
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 10 + 8}s`;
+                heart.style.fontSize = `${Math.random() * 10 + 20}px`;
+                heart.style.animationDelay = `${Math.random() * -12}s`;
+                document.body.appendChild(heart);
+            }
+        }
+        createFlyingHearts();
+
+        let clickCount = 0;
+        const questions = [
+            "are you sure?", "are you really really sure?", "like for sure sure baby?", "think about it babe- i'm ini- and i'm annoying- so still yes?", 
+            "would you say yes even if i woke you up at 3 am for food?", "no way u said yes for that lmao... but think again though what if u got tired of saying yes until now.. are you still sure??", 
+            "do you think we're the cutest?", "even if i stole your fries?", "what if i spam you with cat pics forever?", "still wanna be my valentine?", 
+            "would you say yes if i made you listen to my fav song on loop?", "would you love me if i talked non-stop?", "do you promise to never ghost me?", "last chance... sure sure?", 
+            "i love you so much! say yes again!", "i'm so happpyyyy ur my valentine nowww lesgooo happy valentines day babbbyyy ❤️🥺❤️<br><br><br>ps ;)<br>happy 5 months babyy"
+        ];
+        
+        function createOptionBox(message) {
+            const box = document.createElement("div");
+            box.classList.add("container");
+            box.innerHTML = `<h1>${message}</h1><div class='button-container'><button class='yes-btn'>yes!</button><button class='no-btn'>no...</button></div>`;
+            document.body.appendChild(box);
+            
+            box.querySelector(".yes-btn").addEventListener("click", function() {
+                box.remove();
+                if (clickCount < 15) {
+                    createOptionBox(questions[++clickCount]);
+                }
+            });
+            
+            box.querySelector(".no-btn").addEventListener("click", function() {
+                box.remove();
+                if (clickCount === 0) {
+                    createOptionBox("bitch say yes already");
+                } else {
+                    createOptionBox("😭🥺 really??? be honest..");
+                }
+            });
+        }
+
+        document.getElementById("yes-btn").addEventListener("click", function() {
+            createOptionBox(questions[clickCount]);
+        });
+
+        document.getElementById("no-btn").addEventListener("click", function() {
+            createOptionBox("bitch say yes already");
+        });
+    </script>
+</body>
+</html>
